@@ -1,0 +1,12 @@
+<div id="sport-centers-search-component">
+    <form>
+        <input [(ngModel)]="searchTerm" name="searchTerm" type="text">
+        <button (click)="search($event)">Find</button>
+    </form>
+
+    Here: {{ searchTerm }}
+
+    <div>Centers:
+        <div *ngFor="let center of sportCentersResult">{{center.name}}</div>
+    </div>
+</div>

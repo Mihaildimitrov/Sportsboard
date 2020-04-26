@@ -1,0 +1,31 @@
+{
+    "tournaments": [{
+            "id": 1,
+            "title": "Tournament 1",
+            "description": "Some description",
+            "events": [],
+            "users": []
+        },
+        {
+            "id": 2,
+            "title": "Tournament 2",
+            "description": "Some description",
+            "events": [],
+            "users": []
+        },
+        {
+            "id": 3,
+            "title": "Tournament 3",
+            "description": "Some description",
+            "events": [],
+            "users": []
+        },
+        {
+            "id": 4,
+            "title": "Tournament 4",
+            "description": "Some description",
+            "events": [],
+            "users": []
+        }
+    ]
+}

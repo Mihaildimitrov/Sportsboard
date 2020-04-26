@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "sportsboard-d2547": {
+      "hosting": {
+        "sports-board": [
+          "sportsboard-d2547"
+        ]
+      }
+    }
+  }
+}

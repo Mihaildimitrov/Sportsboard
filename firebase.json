@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "sports-board",
+      "public": "dist/sports-board",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}
