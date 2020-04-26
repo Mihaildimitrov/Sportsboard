@@ -1,8 +1,10 @@
 import { AuthenticationService } from './../../services/authentication.service';
-import { SignUpCredentials } from './../../models/sign-up-credentials.model';
+import { SignUpCredentials, ISignUpCredentials } from './../../models/sign-up-credentials.model';
 import { IAppState } from './../../../store/app.state';
 import { Store } from '@ngrx/store';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { SignUpComponent } from '../../components/sign-up/sign-up.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up-view',
@@ -11,24 +13,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignUpViewComponent implements OnInit {
 
+  signUpCredentials: ISignUpCredentials;
+
   constructor(
     private store: Store<IAppState>,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
   }
 
-  signUpTestCredentials: SignUpCredentials = {
-    email: 'admin@bg.bg',
-    password: 'admin123',
-    firstName: 'Test 1',
-    lastName: 'Test 2'
-  };
-
-  onSubmit() {
-    // this.store.dispatch(signUp({ signUpCredentials: this.signUpTestCredentials }));
-    this.authenticationService.SignUp(this.signUpTestCredentials);
+  onSubmit($event){
+    this.signUpCredentials = $event;
+    this.authenticationService.SignUp(this.signUpCredentials);
+    // TODO SendVerificationEmail();
+    // route.navigate([])
+    this.router.navigateByUrl('/signin');
   }
-
 }

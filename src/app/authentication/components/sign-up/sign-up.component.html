@@ -1,1 +1,33 @@
-<p>sign-up works!</p>
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <p>
+        <mat-form-field appearance="fill">
+            <mat-label>username</mat-label>
+            <input matInput formControlName="firstName" placeholder="Placeholder">
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="fill">
+            <mat-label>lastname</mat-label>
+            <input matInput formControlName="lastName" placeholder="Placeholder">
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="fill">
+            <mat-label>email</mat-label>
+            <input matInput formControlName="email" placeholder="Placeholder">
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="fill">
+            <mat-label>password</mat-label>
+            <input matInput formControlName="password" placeholder="Placeholder">
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="fill">
+            <mat-label>confirm password</mat-label>
+            <input matInput formControlName="confPassword" placeholder="Placeholder">
+        </mat-form-field>
+    </p>
+    <button mat-button type="submit">real sign up</button>
+</form>

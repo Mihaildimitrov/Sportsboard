@@ -14,11 +14,11 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
-import { ProfilesModule } from './profiles/profiles.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-import { SportCentersModule } from './sport-centers/sport-centers.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -31,15 +31,15 @@ import { SportCentersModule } from './sport-centers/sport-centers.module';
     AuthenticationModule,
     TournamentsModule,
     HttpClientModule,
-    ProfilesModule,
     DashboardModule,
-    SportCentersModule,
     RouterModule,
     AngularFireModule.initializeApp(environment.firebase),
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    BrowserAnimationsModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

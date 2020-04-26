@@ -1,25 +1,15 @@
-import { initialTournamentState, ITournamentsState } from './tournaments.state';
-import { TournamentsActions, TournamentsActionsTypes } from './tournaments.actions';
+import { getTournamentsSuccess, getTournamentsFailure, getTournamentSuccess, getTournamentFailure } from './tournaments.actions';
+import { createReducer, on } from '@ngrx/store';
+import { initialTournamentState } from './tournaments.state';
 
-export const tournamentsReducers = (
-  state = initialTournamentState,
-  action: TournamentsActions
-): ITournamentsState => {
-  switch (action.type) {
-    case TournamentsActionsTypes.GetTournamentsSuccess: {
-      return {
-        ...state,
-        tournaments: action.payload
-      };
-    }
-    case TournamentsActionsTypes.GetTournamentSuccess: {
-      return {
-        ...state,
-        selectedTournament: action.payload
-      };
-    }
 
-    default:
-      return state;
-  }
-};
+const _tournamentsReducers = createReducer(initialTournamentState,
+  on(getTournamentsSuccess, (state, { tournaments }) => ({ ...state, tournaments: tournaments['tournaments'] })),
+  on(getTournamentsFailure, (state, { error }) => ({ ...state, tournaments: [], error: error })),
+  on(getTournamentSuccess, (state, { tournament }) => ({ ...state, tournament: tournament })),
+  on(getTournamentFailure, (state, { error }) => ({ ...state, tournament: null, error: error }))
+);
+ 
+export function tournamentsReducers(state, action) {
+  return _tournamentsReducers(state, action);
+}

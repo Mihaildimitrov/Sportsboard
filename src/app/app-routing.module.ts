@@ -1,12 +1,10 @@
-import { AuthGuard } from './authentication/services/auth.guard';
+import { PlayersModule } from './players/players.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { TournamentsModule } from './tournaments/tournaments.module';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProfilesModule } from './profiles/profiles.module';
 import { AngularFireAuthGuard, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
-import { SportCentersModule } from './sport-centers/sport-centers.module';
 
 
 const redirectUnauthorizedToSignIn = () => redirectUnauthorizedTo(['signin']);
@@ -20,13 +18,13 @@ const routes: Routes = [
     data: { authGuardPipe: redirectUnauthorizedToSignIn }
   },
   {
-    path: 'profiles',
-    loadChildren: () => ProfilesModule,
+    path: '',
+    loadChildren: () => PlayersModule,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToSignIn }
   },
   {
-    path: 'tournaments',
+    path: '',
     loadChildren: () => TournamentsModule,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToSignIn }
@@ -34,10 +32,6 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => AuthenticationModule
-  },
-  {
-    path: 'centers',
-    loadChildren: () => SportCentersModule
   },
   { path: '**', redirectTo: 'dashboard' }
 ];

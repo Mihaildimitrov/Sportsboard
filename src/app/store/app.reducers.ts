@@ -3,13 +3,11 @@ import { IAppState } from './app.state';
 import { ActionReducerMap } from '@ngrx/store';
 import { routerReducer } from '@ngrx/router-store';
 import { tournamentsReducers } from '../tournaments/store/tournaments.reducers';
-import { profileReducers } from '../profiles/store/profiles.reducers';
-import { sportCenterReducer } from '../sport-centers/store/sport-centers.reducers';
+import { playerReducers } from '../players/store/players.reducers';
 
 export const appReducers: ActionReducerMap<IAppState, any> = {
   router: routerReducer,
-  profiles: profileReducers,
+  players: playerReducers,
   tournaments: tournamentsReducers,
-  authentication: authenticationReducers,
-  sportCenters: sportCenterReducer
+  authentication: authenticationReducers
 };

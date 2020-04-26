@@ -10,10 +10,14 @@ import { ResetPasswordViewComponent } from './views/reset-password-view/reset-pa
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { FormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input'; 
+
+const MaterialModules: any[] =[MatButtonModule,MatFormFieldModule,MatInputModule]
 
 @NgModule({
   declarations: [
@@ -25,8 +29,11 @@ import { EffectsModule } from '@ngrx/effects';
     FormsModule,
     RouterModule.forChild(authRoutes),
     StoreModule.forFeature("authentication", authenticationReducers),
-    EffectsModule.forFeature([AuthenticationEffects])
-  ]
+    EffectsModule.forFeature([AuthenticationEffects]),
+    MaterialModules,
+    ReactiveFormsModule
+  ],
+  exports:[MaterialModules]
 })
 export class AuthenticationModule { }
   

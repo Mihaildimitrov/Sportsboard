@@ -11,3 +11,7 @@ export class Tournament {
         this.description = description;
     }
 }
+
+export interface TournamentHttp {
+    tournaments: Tournament[];
+}

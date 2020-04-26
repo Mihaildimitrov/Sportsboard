@@ -1,30 +1,9 @@
+import { createAction, props } from '@ngrx/store';
 import { Tournament } from './../models/tournament.model';
-import { Action } from '@ngrx/store';
 
-export enum TournamentsActionsTypes {
-  GetTournaments = 'Get tournaments',
-  GetTournamentsSuccess = 'Get tournaments Success',
-  GetTournament = 'Get tournament',
-  GetTournamentSuccess = 'Get tournament Success'
-}
-
-export class GetTournaments implements Action {
-  public readonly type = TournamentsActionsTypes.GetTournaments;
-}
-
-export class GetTournamentsSuccess implements Action {
-  public readonly type = TournamentsActionsTypes.GetTournamentsSuccess;
-  constructor(public payload: Tournament[]) {}
-}
-
-export class GetTournament implements Action {
-  public readonly type = TournamentsActionsTypes.GetTournament;
-  constructor(public payload: string) {}
-}
-
-export class GetTournamentSuccess implements Action {
-  public readonly type = TournamentsActionsTypes.GetTournamentSuccess;
-  constructor(public payload: Tournament) {}
-}
-
-export type TournamentsActions = GetTournaments | GetTournamentsSuccess | GetTournament | GetTournamentSuccess;
+export const getTournaments = createAction('Get tournaments');
+export const getTournamentsSuccess = createAction('Get tournaments success', props<{ tournaments: Tournament[] }>());
+export const getTournamentsFailure = createAction('Get tournaments failure', props<{ error: any }>());
+export const getTournament = createAction('Get tournament', props<{ id: any }>());
+export const getTournamentSuccess = createAction('Get tournament success', props<{ tournament: Tournament }>());
+export const getTournamentFailure = createAction('Get tournament failure', props<{ error: any }>());

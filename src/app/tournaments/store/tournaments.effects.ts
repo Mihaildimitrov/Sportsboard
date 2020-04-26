@@ -1,38 +1,48 @@
+import { selectTournamentsArray } from './tournaments.selector';
+import { Tournament } from './../models/tournament.model';
+import { getTournament, getTournaments, getTournamentsSuccess, getTournamentsFailure, getTournamentSuccess } from './tournaments.actions';
+import { environment } from './../../../environments/environment.prod';
+import { HttpClient } from '@angular/common/http';
 import { IAppState } from './../../store/app.state';
-import { selectTournamentsList } from './tournaments.selector';
-import { TournamentsActionsTypes, GetTournament, GetTournaments, GetTournamentsSuccess, GetTournamentSuccess } from './tournaments.actions';
-import { TournamentsService, TournamentHttp } from './../services/tournaments.service';
 import { Injectable } from '@angular/core';
-import { Effect, ofType, Actions } from '@ngrx/effects';
+import { Effect, ofType, Actions, createEffect } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
-import { of } from 'rxjs';
-import { switchMap, map, withLatestFrom } from 'rxjs/operators';
+import { of, from } from 'rxjs';
+import { switchMap, map, withLatestFrom, catchError, exhaustMap } from 'rxjs/operators';
+
 
 @Injectable()
 export class TournamentsEffects {
+  tournamentsUrl = `${environment.apiUrl}tournaments.json`;
 
   constructor(
-    private tournamentsService: TournamentsService,
     private actions$: Actions,
-    private store: Store<IAppState>
+    private store: Store<IAppState>,
+    private http: HttpClient
   ) {}
 
-  @Effect()
-  getTournament$ = this.actions$.pipe(
-    ofType<GetTournament>(TournamentsActionsTypes.GetTournament),
-    map(action => action.payload),
-    withLatestFrom(this.store.pipe(select(selectTournamentsList))),
-    switchMap(([id, tournaments]) => {
-      const selectedTournament = tournaments.filter(tournament => Number(tournament.id) === Number(id))[0];
-      return of(new GetTournamentSuccess(selectedTournament));
-    })
+  getTournaments$ = createEffect(() =>
+    this.actions$.pipe( 
+      ofType(getTournaments),
+      exhaustMap(() => 
+      from(this.http.get<Tournament[]>(this.tournamentsUrl)).pipe(
+          map(tournaments => getTournamentsSuccess({ tournaments: tournaments })),
+          catchError(error => of(getTournamentsFailure({ error })))
+        )
+      )
+    )
   );
 
-  @Effect()
-  getProfiles$ = this.actions$.pipe(
-    ofType<GetTournaments>(TournamentsActionsTypes.GetTournaments),
-    switchMap(() => this.tournamentsService.GetTournaments()),
-    switchMap((tournamentHttp: TournamentHttp) => of(new GetTournamentsSuccess(tournamentHttp.tournaments)))
+  getTournament$ = createEffect(() =>
+    this.actions$.pipe( 
+      ofType(getTournament),
+      map(action => action.id),
+      withLatestFrom(this.store.pipe(select(selectTournamentsArray))),
+      switchMap(([id, tournaments]) => {
+        const selectedTournament = tournaments.filter(tournament => Number(tournament.id) === Number(id))[0];
+        return of(getTournamentSuccess({ tournament: selectedTournament }));
+      })
+    )
   );
 
 }

@@ -1,0 +1,27 @@
+{
+    "players": [{
+            "id": 1,
+            "email": "mihail@bg.bg",
+            "firstName": "Mihail",
+            "lastName": "Dimitrov"
+        },
+        {
+            "id": 2,
+            "email": "georgi@bg.bg",
+            "firstName": "Georgi",
+            "lastName": "Milev"
+        },
+        {
+            "id": 3,
+            "email": "viktor@bg.bg",
+            "firstName": "Viktor",
+            "lastName": "Doninski"
+        },
+        {
+            "id": 4,
+            "email": "sevastian@bg.bg",
+            "firstName": "Sevastian",
+            "lastName": "Cholakov"
+        }
+    ]
+}

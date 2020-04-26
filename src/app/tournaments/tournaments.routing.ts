@@ -3,6 +3,6 @@ import { TournamentsViewComponent } from './views/tournaments-view/tournaments-v
 import { Routes } from '@angular/router';
 
 export const tournamentsRoutes: Routes = [
-    { path: "", component: TournamentsViewComponent },
-    { path: ":id", component: TournamentViewComponent }
+    { path: "tournaments", component: TournamentsViewComponent },
+    { path: "tournament/:id", component: TournamentViewComponent }
 ]

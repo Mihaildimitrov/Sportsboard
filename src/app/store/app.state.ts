@@ -1,13 +1,21 @@
-import { IAuthenticationState } from './../authentication/store/authentication.state';
-import { IProfileState } from './../profiles/store/profiles.state';
+import { IPlayersState, initialPlayerState } from './../players/store/players.state';
+import { IAuthenticationState, initialAuthenticationState } from './../authentication/store/authentication.state';
 import { RouterReducerState } from '@ngrx/router-store';
-import { ITournamentsState } from '../tournaments/store/tournaments.state';
-import { ISportCentersState } from '../sport-centers/models/i-sport-centers-state';
+import { ITournamentsState, initialTournamentState } from '../tournaments/store/tournaments.state';
 
 export interface IAppState {
   router?: RouterReducerState;
-  profiles: IProfileState;
+  players: IPlayersState;
   tournaments: ITournamentsState;
-  authentication: IAuthenticationState;
-  sportCenters: ISportCentersState
+  authentication: IAuthenticationState
+}
+
+export const initialAppState: IAppState = {
+    players: initialPlayerState,
+    tournaments: initialTournamentState,
+    authentication: initialAuthenticationState
+};
+
+export function getInitialState(): IAppState {
+  return initialAppState;
 }

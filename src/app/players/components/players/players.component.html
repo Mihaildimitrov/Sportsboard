@@ -1,0 +1,16 @@
+<table>
+    <thead>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let player of players" (click)="navigateToPlayer(player.id)">
+            <td>{{player.id}}</td>
+            <td>{{player.firstName}}</td>
+            <td>{{player.lastName}}</td>
+            <td>{{player.email}}</td>
+        </tr>
+    </tbody>
+</table>

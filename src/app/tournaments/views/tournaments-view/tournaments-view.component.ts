@@ -1,6 +1,6 @@
+import { TournamentsService } from './../../services/tournaments.service';
 import { IAppState } from './../../../store/app.state';
-import { GetTournaments } from './../../store/tournaments.actions';
-import { selectTournamentsList } from './../../store/tournaments.selector';
+import { selectTournamentsArray } from './../../store/tournaments.selector';
 import { select, Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -12,12 +12,12 @@ import { Router } from '@angular/router';
 })
 export class TournamentsViewComponent implements OnInit {
 
-  tournaments$ = this.store.pipe(select(selectTournamentsList));
+  tournaments$ = this.store.pipe(select(selectTournamentsArray));
 
-  constructor(private store: Store<IAppState>, private router: Router) { }
+  constructor(private store: Store<IAppState>, private tournamentsService: TournamentsService, private router: Router) { }
 
   ngOnInit(): void {
-    this.store.dispatch(new GetTournaments());
+    this.tournamentsService.getTournaments();
   }
 
   navigateToTournament(id: string) {

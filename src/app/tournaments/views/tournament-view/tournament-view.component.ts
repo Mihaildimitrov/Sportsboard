@@ -1,6 +1,6 @@
+import { selectTournament } from './../../store/tournaments.selector';
 import { IAppState } from './../../../store/app.state';
-import { selectSelectedTournament } from './../../store/tournaments.selector';
-import { GetTournament } from './../../store/tournaments.actions';
+import { getTournament } from './../../store/tournaments.actions';
 import { select, Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TournamentViewComponent implements OnInit {
 
-  tournament$ = this.store.pipe(select(selectSelectedTournament));
+  tournament$ = this.store.pipe(select(selectTournament));
 
   constructor(
     private store: Store<IAppState>,
@@ -20,7 +20,7 @@ export class TournamentViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.store.dispatch(new GetTournament(this.route.snapshot.params.id));
+    this.store.dispatch(getTournament({ id: this.route.snapshot.params.id }));
   }
 
 }

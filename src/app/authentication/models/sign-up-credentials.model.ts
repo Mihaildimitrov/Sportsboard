@@ -1,4 +1,4 @@
-export class SignUpCredentials {
+export class SignUpCredentials implements ISignUpCredentials {
     email: string;
     password: string;
     firstName: string;
@@ -11,3 +11,11 @@ export class SignUpCredentials {
         this.lastName = lastName;
     }
 }
+
+export interface ISignUpCredentials {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+  }
+  
